@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Zippbike - Mobile</title>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+
+    <!-- HTML For Mobile Container Starts -->
+    <!-- <div class="ctn">
+      <div class="ctn-img">
+        <div class="ctn-inner">
+
+        </div>
+      </div>
+    </div> -->
+    <!-- HTML For Mobile Container Ends -->
+    
+    <!-- HTML For Animation Starts -->
+    <button class="lb" onclick="start()">Launch</button>
+    
+    <div class="ctn-anim">
+      <div class="ctn-anim-inner">              
+        <div class="ctn-bike">            
+          <img src="assets/p-1.png" />
+          <img src="assets/p-2.png" />
+        </div>
+        
+        <div class="ctn-logo">
+          <img src="assets/zipp.png" class="zipp"/>
+          <img src="assets/bike.png" class="bike"/>
+        </div>
+
+        <div class="ctn-del">
+          <img src="assets/delivery.png" class="del"/>
+        </div>
+      </div>            
+    </div>
+    <!-- HTML For Animation Ends -->
+
+    <script src="js/TweenMax.min.js"></script>
+    <script>
+      var audio = new Audio('assets/zipp.mp3');
+
+      function start(){
+        new TimelineMax({ delay: 1 })
+        .set(".ctn-logo img", {xPercent: "250"})
+        .set(".ctn-anim-inner", {opacity: 1})
+        .set("button.lb", {opacity: 0})
+        .add("lb0")
+        .to(".ctn-bike", 1, { scaleX:1, scaleY:1 }, "lb0")
+        .add("lb1", "lb0+=.7")
+        .add(function(){
+          audio.muted = false;
+          audio.play();
+        }, "lb1")
+        .to(document.querySelectorAll(".ctn-bike img")[0], .3, { y: "+=10", yoyo: true, repeat: 1, repeatDelay: .3 }, "lb1")
+        .add("lb2")
+        .to(".ctn-logo img.zipp", .7, { xPercent: 0 }, "lb2")
+        .add("lb3", "lb2+=.5")
+        .to(".ctn-logo img.bike", .7, { xPercent: 0 }, "lb3")
+        .add("lb4")
+        .set(".ctn-logo img", { clearProps: "transform" }, "lb4")
+        .to(".ctn-bike", .3, { transformOrigin: "50% 100%", rotationZ: 3 }, "lb4")
+        .to(".ctn-bike", .3, { transformOrigin: "50% 100%", rotationZ: -3 })
+        .to(".ctn-bike", .3, { transformOrigin: "50% 100%", rotationZ: 0 })
+        .add("lb5", "lb4+=.7")
+        .to(".ctn-del", .3, { opacity: 1 }, "lb5")
+      }
+    </script>
+  </body>
+</html>
+
